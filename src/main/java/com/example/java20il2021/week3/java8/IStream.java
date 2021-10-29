@@ -32,6 +32,8 @@ public interface IStream<T> {
 
     IStream<T> sorted(Comparator<T> cpt);
 
+    IStream<T> sorted();
+
     IStream<T> distinct();
 
     <R> R collect(Supplier<R> supplier, BiConsumer<R, T> accumulator);
@@ -44,8 +46,8 @@ class TestIStream {
         List<Integer> l = new ArrayList<>();
         l.add(4);
         l.add(3);
-        l.add(3);
-        l.add(3);
+        l.add(7);
+        l.add(8);
         l.add(3);
         IStream<Integer> stream = IStream.of(l);
         l.add(2);
@@ -53,7 +55,7 @@ class TestIStream {
 //        List<String> ans = stream.map(x -> x * 2).map(x -> String.valueOf(x)).sorted((v1, v2) -> v1.compareTo(v2)).collect(() -> new ArrayList(), (res, val) -> res.add(val));
 //        System.out.println(ans);
         // int v = stream.map(x -> x * 2).sorted((v1, v2) -> v1.compareTo(v2)).reduce(0, (res, val) -> res + val);
-        List<String> ans = stream.distinct().sorted((v1, v2) -> v1.compareTo(v2)).collect(() -> new ArrayList(), (res, val) -> res.add(val));
+        List<String> ans = stream.sorted().collect(() -> new ArrayList(), (res, val) -> res.add(val));
 //        System.out.println(ans);
         System.out.println(ans);
     }

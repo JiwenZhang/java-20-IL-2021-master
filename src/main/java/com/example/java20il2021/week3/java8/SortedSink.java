@@ -7,12 +7,16 @@ import java.util.List;
 public class SortedSink<T> implements ISink<T>{
     private final ISink<T> downstream;
     private List<T> list;
-    private final Comparator<T> cpt;
+    private Comparator<T> cpt;
 
     public SortedSink(ISink<T> downstream, Comparator<T> cpt) {
         this.downstream = downstream;
         this.cpt = cpt;
     }
+
+   public void setComparator(Comparator<T> cpt) {
+        this.cpt = cpt;
+   }
 
     @Override
     public void begin(long size) {
